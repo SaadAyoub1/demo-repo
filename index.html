@@ -2,11 +2,90 @@
 <html>
 <head>
     <link rel="stylesheet" href="style.css">
-    <title>Salah</title>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/256/5484/5484039.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Secular+One&display=swap" rel="stylesheet">
+    <title>Game project</title>
 </head>
 <body>
-    <h1>This is a title</h1>
-    <p>They say you only come to peace with yourself when you know yourself better than those around you. Derick knew nothing about this. He thought he had found peace but this was an illusion as he was about to find out with an unexpected occurrence that he actually knew nothing about himself.</p>
-    
+    <div class="dice_game">
+        <h1>Dice Roll Game</h1>
+        <img src="dice-2026955_960_720.png" alt="Dice" id="dice">
+        <button type="submit" id="but1">Roll Dice</button>
+        <p id="result"></p>
+        <p id="player-turn"></p>
+        <p id="score-player1">Player 1 Score: 0</p>
+        <p id="score-player2">Player 2 Score: 0</p>
+        <p id="winner"></p>
+    </div>
+
+    <script>
+        const button = document.getElementById('but1');
+        const resultParagraph = document.getElementById('result');
+        const diceImage = document.getElementById('dice');
+        const playerTurnParagraph = document.getElementById('player-turn');
+        const player1ScoreParagraph = document.getElementById('score-player1');
+        const player2ScoreParagraph = document.getElementById('score-player2');
+        const winnerParagraph = document.getElementById('winner');
+
+        let currentPlayer = 1;
+        let player1Score = 0;
+        let player2Score = 0;
+
+        button.addEventListener('click', function() {
+            // Generate a random number between 1 and 6
+            const randomNumber = Math.floor(Math.random() * 6) + 1;
+            
+            // Update the paragraph with the generated number
+            resultParagraph.textContent = `The dice rolled: ${randomNumber}`;
+            
+            // Update the image based on the generated number
+            diceImage.src = `dice-${randomNumber}.png`;
+
+            // Add the score to the current player
+            if (currentPlayer === 1) {
+                player1Score += randomNumber;
+                player1ScoreParagraph.textContent = `Player 1 Score: ${player1Score}`;
+            } else {
+                player2Score += randomNumber;
+                player2ScoreParagraph.textContent = `Player 2 Score: ${player2Score}`;
+            }
+
+            // Check if the current player rolled a 6
+            if (randomNumber === 6) {
+                // The current player gets another turn
+                playerTurnParagraph.textContent = `Player ${currentPlayer} rolled a 6. Play again.`;
+            } else {
+                // Switch to the next player's turn
+                currentPlayer = currentPlayer === 1 ? 2 : 1;
+                playerTurnParagraph.textContent = `Player ${currentPlayer}'s turn`;
+            }
+
+            // Check if any player has reached 20 or more points
+            if (player1Score >= 20) {
+                winnerParagraph.textContent = 'Player 1 Wins!';
+                button.textContent = 'Replay';
+                button.disabled = true;
+                resetGame();
+            } else if (player2Score >= 20) {
+                winnerParagraph.textContent = 'Player 2 Wins!';
+                button.textContent = 'Replay';
+                button.disabled = true;
+                resetGame();
+            }
+        });
+
+        function resetGame() {
+            player1Score = 0;
+            player2Score = 0;
+            currentPlayer = 1;
+            player1ScoreParagraph.textContent = 'Player 1 Score: 0';
+            player2ScoreParagraph.textContent = 'Player 2 Score: 0';
+            playerTurnParagraph.textContent = 'Player 1\'s turn';
+            resultParagraph.textContent = '';
+            diceImage.src = 'dice-2026955_960_720.png';
+        }
+    </script>
 </body>
 </html>

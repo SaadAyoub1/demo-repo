@@ -1,0 +1,26 @@
+.dice_game{
+    width: 500px;
+    border: 4px solid;
+    text-align: justify;
+    padding-left: 5px;
+    padding-right: 5px;
+    position: relative;
+}
+p{
+    color:white;
+    background-color: rgb(16, 16, 92);
+    font-size: 20px;
+}
+#but1{
+    font-size: 28px;
+    color: white;
+    background-color: red;
+    border-radius: 30px;
+}
+#dice{
+    height: 100px;
+    width: 100px;
+    position:absolute;
+    right: 10px;
+    top: 10px;
+}
