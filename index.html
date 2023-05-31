@@ -11,7 +11,7 @@
 <body>
     <div class="dice_game">
         <h1>Dice Roll Game</h1>
-        <img src="dice-2026955_960_720.png" alt="Dice" id="dice">
+        <img src="images/dice-2026955_960_720.png" alt="Dice" id="dice">
         <button type="submit" id="but1">Roll Dice</button>
         <p id="result"></p>
         <p id="player-turn"></p>
@@ -41,7 +41,7 @@
             resultParagraph.textContent = `The dice rolled: ${randomNumber}`;
             
             // Update the image based on the generated number
-            diceImage.src = `dice-${randomNumber}.png`;
+            diceImage.src = `images/dice-${randomNumber}.png`;
 
             // Add the score to the current player
             if (currentPlayer === 1) {
